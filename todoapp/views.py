@@ -38,3 +38,20 @@ class GetAllTodoItems(View):
         # Convert todo items to json
         todo_items_json = [todo_item.to_json() for todo_item in todo_items]
         return JsonResponse({'todo_items': todo_items_json})
+
+# Create view for removing a todo item
+class RemoveTodoItem(View):
+    def get(self, request, id):
+        """
+        Remove a todo item
+        args:
+            request: the request object
+            id: the todo item id
+        returns:
+            JsonResponse: the response object
+        """
+        # Get the todo item
+        todo_item = TodoItem.objects.get(id=id)
+        # Delete the todo item
+        todo_item.delete()
+        return JsonResponse({'todo': todo_item.to_json()})
