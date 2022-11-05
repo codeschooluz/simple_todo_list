@@ -21,3 +21,20 @@ class AddTodoItem(View):
         todo_item = TodoItem(title=title, task=task)
         todo_item.save()                  
         return JsonResponse({'message': 'Todo item created successfully'})
+
+# Create view for getting all todo items
+class GetAllTodoItems(View):
+    def get(self, request):
+        """
+        Get all todo items
+        args:
+            request: the request object
+        returns:
+            JsonResponse: the response object
+        """
+        # Get all todo items
+        todo_items = TodoItem.objects.all()
+        
+        # Convert todo items to json
+        todo_items_json = [todo_item.to_json() for todo_item in todo_items]
+        return JsonResponse({'todo_items': todo_items_json})
