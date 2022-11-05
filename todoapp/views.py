@@ -55,3 +55,29 @@ class RemoveTodoItem(View):
         # Delete the todo item
         todo_item.delete()
         return JsonResponse({'todo': todo_item.to_json()})
+
+# Create view for updating a todo item
+class UpdateTodoItem(View):
+    def post(self, request, id):
+        """
+        Update a todo item
+        args:
+            request: the request object
+            id: the todo item id
+        returns:
+            JsonResponse: the response object
+        """
+        # Get the todo item
+        todo_item = TodoItem.objects.get(id=id)
+        # Get the data from the request
+        title = request.POST.get('title')
+        task = request.POST.get('task')
+        status = request.POST.get('status')
+        description = request.POST.get('description')
+        # Update the todo item
+        todo_item.title = title
+        todo_item.task = task
+        todo_item.status = status
+        todo_item.description = description
+        todo_item.save()
+        return JsonResponse({'todo': todo_item.to_json()})
