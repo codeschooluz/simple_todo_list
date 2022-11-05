@@ -8,7 +8,7 @@ class TodoItem(models.Model):
     title = models.CharField(max_length=255)
     task = models.TextField()
     status = models.BooleanField(default=False)
-    description = models.TextField()
+    description = models.TextField(default='', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)    
 
