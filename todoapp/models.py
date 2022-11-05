@@ -12,5 +12,16 @@ class TodoItem(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)    
 
+    def to_json(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'task': self.task,
+            'status': self.status,
+            'description': self.description,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }
+
     def __str__(self):
         return self.title
